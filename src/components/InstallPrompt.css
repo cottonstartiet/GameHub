@@ -1,0 +1,49 @@
+.install-banner {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 12px 14px;
+  border-radius: var(--gh-radius);
+  background: var(--gh-surface-2);
+  border: 1px solid var(--gh-blue-glow);
+  box-shadow: var(--gh-shadow), var(--gh-shadow-glow);
+  animation: install-up 0.4s var(--gh-ease);
+}
+@keyframes install-up {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
+.install-text {
+  font-size: 0.9rem;
+}
+.install-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.install-yes {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #04122b;
+  background: var(--gh-triangle);
+}
+.install-no {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: transparent;
+  color: var(--gh-text);
+}

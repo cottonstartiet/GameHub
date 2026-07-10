@@ -1,0 +1,41 @@
+/* Game Hub theme tokens — PlayStation-inspired palette.
+   These CSS variables are the single source of truth for colors/spacing and are
+   also read by Phaser games (see src/games/theme.ts) so every game shares the theme. */
+:root {
+  /* Backgrounds */
+  --gh-bg: #0a0f2c;
+  --gh-bg-2: #10173f;
+  --gh-surface: #171f4d;
+  --gh-surface-2: #1e2860;
+
+  /* Brand blue (PlayStation) */
+  --gh-blue: #0070d1;
+  --gh-blue-deep: #003791;
+  --gh-blue-glow: #2f8fff;
+
+  /* Iconic shape accents */
+  --gh-triangle: #46e0b8; /* green  */
+  --gh-circle: #ff5470; /* red/pink */
+  --gh-cross: #4aa3ff; /* blue   */
+  --gh-square: #d76bff; /* magenta */
+
+  /* Text */
+  --gh-text: #eef2ff;
+  --gh-text-dim: #9aa6d6;
+
+  /* Feedback */
+  --gh-good: #46e0b8;
+  --gh-warn: #ffce54;
+  --gh-bad: #ff5470;
+
+  /* Layout */
+  --gh-radius: 18px;
+  --gh-radius-sm: 12px;
+  --gh-gap: 16px;
+  --gh-maxw: 900px;
+  --gh-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --gh-shadow-glow: 0 0 24px rgba(47, 143, 255, 0.45);
+
+  /* Motion */
+  --gh-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

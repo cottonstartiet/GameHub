@@ -1,0 +1,77 @@
+.game-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px 18px;
+  border-radius: var(--gh-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--gh-surface);
+  color: var(--gh-text);
+  box-shadow: var(--gh-shadow);
+  animation: card-rise 0.5s var(--gh-ease) both;
+  transition: transform 0.18s var(--gh-ease), box-shadow 0.18s;
+}
+.game-card:hover:not(.soon),
+.game-card:focus-visible:not(.soon) {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--gh-shadow), var(--gh-shadow-glow);
+}
+.game-card:active:not(.soon) {
+  transform: scale(0.98);
+}
+.game-card.soon {
+  opacity: 0.6;
+  cursor: default;
+}
+
+@keyframes card-rise {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+}
+
+.game-icon {
+  width: 84px;
+  height: 84px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 2px 6px rgba(255, 255, 255, 0.25);
+}
+.game-glyph {
+  font-size: 2.6rem;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+  animation: glyph-float 3.2s ease-in-out infinite;
+}
+@keyframes glyph-float {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.game-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.game-tagline {
+  font-size: 0.8rem;
+  color: var(--gh-text-dim);
+}
+
+.soon-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--gh-square);
+  color: #1a0a2c;
+  font-weight: 700;
+}

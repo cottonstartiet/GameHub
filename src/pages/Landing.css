@@ -1,0 +1,86 @@
+.landing {
+  width: 100%;
+  max-width: var(--gh-maxw);
+  margin: 0 auto;
+  padding: 28px 18px 40px;
+  padding-top: calc(28px + env(safe-area-inset-top));
+}
+
+.landing-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.brand-shapes {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.shape {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  animation: shape-pop 0.6s var(--gh-ease) both;
+}
+.shape.triangle {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 26px solid var(--gh-triangle);
+  animation-delay: 0ms;
+}
+.shape.circle {
+  border-radius: 50%;
+  border: 4px solid var(--gh-circle);
+  animation-delay: 90ms;
+}
+.shape.cross {
+  color: var(--gh-cross);
+  font-size: 1.4rem;
+  animation-delay: 180ms;
+}
+.shape.square {
+  border: 4px solid var(--gh-square);
+  border-radius: 4px;
+  animation-delay: 270ms;
+}
+@keyframes shape-pop {
+  from {
+    transform: scale(0) rotate(-40deg);
+    opacity: 0;
+  }
+}
+
+.brand {
+  font-size: clamp(2.6rem, 11vw, 4.2rem);
+  letter-spacing: 1px;
+  font-weight: 900;
+}
+.brand span {
+  background: linear-gradient(90deg, var(--gh-blue-glow), var(--gh-square));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.brand-sub {
+  color: var(--gh-text-dim);
+  margin-top: 6px;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--gh-gap);
+}
+
+.landing-footer {
+  margin-top: 34px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gh-text-dim);
+}
