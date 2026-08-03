@@ -28,6 +28,16 @@ export const GAMES: GameMeta[] = [
     load: () => import('./snake/Snake'),
   },
   {
+    id: 'maths-trail',
+    title: 'Maths Trail',
+    tagline: '30 levels · pet pal',
+    glyph: '🧮',
+    accentFrom: 'var(--gh-warn)',
+    accentTo: 'var(--gh-circle)',
+    available: true,
+    load: () => import('./maths/MathsGame'),
+  },
+  {
     id: 'coming-soon',
     title: 'More soon',
     tagline: 'New games incoming',
