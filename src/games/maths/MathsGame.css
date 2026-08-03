@@ -1,0 +1,436 @@
+.maths-menu,
+.maths-play {
+  width: 100%;
+  max-width: var(--gh-maxw);
+  margin: 0 auto;
+}
+
+.maths-menu {
+  padding: 22px 18px 40px;
+  padding-top: calc(22px + env(safe-area-inset-top));
+}
+
+.maths-hero {
+  display: grid;
+  gap: 18px;
+  margin: 18px 0 22px;
+}
+
+.maths-kicker {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: var(--gh-warn);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.maths-hero h1 {
+  font-size: clamp(2.4rem, 9vw, 4rem);
+  background: linear-gradient(90deg, var(--gh-warn), var(--gh-circle));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.maths-hero p,
+.maths-section-head p,
+.companion-card span,
+.maths-level-card span,
+.maths-empty-state {
+  color: var(--gh-text-dim);
+}
+
+.maths-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.maths-stats div,
+.maths-panel,
+.maths-board,
+.maths-overlay-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(23, 31, 77, 0.86);
+  box-shadow: var(--gh-shadow);
+}
+
+.maths-stats div {
+  padding: 14px 12px;
+  border-radius: var(--gh-radius-sm);
+  text-align: center;
+}
+
+.maths-stats strong {
+  display: block;
+  font-size: 1.35rem;
+}
+
+.maths-stats span,
+.maths-play-status span,
+.maths-score-pill small {
+  font-size: 0.82rem;
+  color: var(--gh-text-dim);
+}
+
+.maths-panel {
+  padding: 18px;
+  border-radius: var(--gh-radius);
+  margin-top: 16px;
+}
+
+.maths-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.maths-section-head h2,
+.maths-overlay-card h3 {
+  font-size: 1.3rem;
+}
+
+.maths-buddy-preview,
+.badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.maths-buddy-preview span,
+.companion-emoji,
+.maths-overlay-emoji {
+  font-size: 1.8rem;
+}
+
+.maths-buddy-preview small {
+  display: block;
+  color: var(--gh-text-dim);
+}
+
+.companion-grid,
+.maths-level-grid,
+.badge-grid,
+.maths-choice-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.companion-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.companion-card,
+.maths-level-card,
+.maths-choice,
+.maths-ghost-btn,
+.maths-play-btn {
+  font: inherit;
+  color: var(--gh-text);
+}
+
+.companion-card,
+.maths-level-card,
+.maths-choice {
+  border-radius: var(--gh-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  transition:
+    transform 0.18s var(--gh-ease),
+    border-color 0.18s var(--gh-ease),
+    box-shadow 0.18s var(--gh-ease);
+}
+
+.companion-card {
+  padding: 16px;
+  text-align: left;
+}
+
+.companion-card.active,
+.maths-level-card.active {
+  border-color: var(--gh-warn);
+  box-shadow: 0 0 0 1px rgba(255, 206, 84, 0.4), 0 14px 28px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+.companion-card strong,
+.maths-level-card strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.maths-level-grid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.maths-level-card {
+  padding: 14px;
+  text-align: left;
+}
+
+.maths-level-card.locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.maths-level-id {
+  display: inline-flex;
+  margin-bottom: 6px;
+  font-size: 0.82rem;
+  color: var(--gh-warn);
+}
+
+.badge-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.badge-chip {
+  justify-content: flex-start;
+}
+
+.maths-empty-state {
+  padding: 16px;
+  border-radius: var(--gh-radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.maths-ghost-btn,
+.maths-play-btn {
+  border: none;
+  border-radius: var(--gh-radius-sm);
+  padding: 12px 16px;
+}
+
+.maths-ghost-btn {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.maths-ghost-btn.wide,
+.maths-play-btn {
+  width: 100%;
+}
+
+.maths-play-btn {
+  background: linear-gradient(160deg, var(--gh-warn), #ffae42);
+  color: #291200;
+  font-weight: 800;
+  box-shadow: 0 10px 24px rgba(255, 174, 66, 0.35);
+}
+
+.maths-play-btn.compact {
+  width: auto;
+}
+
+.maths-play-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.maths-play {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 18px 14px 24px;
+  padding-top: calc(18px + env(safe-area-inset-top));
+}
+
+.maths-play-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.maths-play-status {
+  flex: 1;
+  min-width: 0;
+}
+
+.maths-play-status strong {
+  display: block;
+}
+
+.maths-score-pill {
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+
+.maths-progress-track {
+  height: 10px;
+  margin: 16px 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.maths-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--gh-triangle), var(--gh-warn));
+  transition: width 0.3s var(--gh-ease);
+}
+
+.maths-stage {
+  position: relative;
+  min-height: calc(100vh - 140px);
+  min-height: calc(100dvh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.maths-board {
+  width: min(100%, 620px);
+  padding: 26px 20px;
+  border-radius: var(--gh-radius);
+  text-align: center;
+}
+
+.maths-topic-tag {
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 206, 84, 0.14);
+  color: var(--gh-warn);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.maths-board h2 {
+  margin: 18px 0 10px;
+  font-size: clamp(1.7rem, 5vw, 2.5rem);
+}
+
+.maths-choice-grid {
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin-top: 20px;
+}
+
+.maths-choice {
+  padding: 18px 14px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.maths-choice.selected {
+  transform: scale(0.98);
+}
+
+.maths-choice.correct {
+  border-color: var(--gh-good);
+  background: rgba(70, 224, 184, 0.16);
+}
+
+.maths-choice.wrong {
+  border-color: var(--gh-bad);
+  background: rgba(255, 84, 112, 0.14);
+}
+
+.maths-companion {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transform: translate(-50%, -50%);
+  transition:
+    left 1s var(--gh-ease),
+    top 1s var(--gh-ease),
+    transform 0.2s var(--gh-ease);
+}
+
+.maths-companion-bubble {
+  max-width: min(240px, 62vw);
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1e2454;
+  font-weight: 600;
+  text-align: center;
+}
+
+.maths-companion-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 20px;
+  background: rgba(8, 13, 39, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.maths-companion.ready .maths-companion-body {
+  animation: buddy-bob 1.7s ease-in-out infinite;
+}
+
+.maths-companion.happy .maths-companion-body,
+.maths-companion.celebrate .maths-companion-body {
+  transform: scale(1.08);
+  box-shadow: 0 0 24px rgba(70, 224, 184, 0.32);
+}
+
+.maths-companion.sad .maths-companion-body {
+  box-shadow: 0 0 24px rgba(255, 84, 112, 0.28);
+}
+
+@keyframes buddy-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.maths-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(7, 10, 28, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.maths-overlay-card {
+  width: min(420px, 100%);
+  padding: 26px 20px;
+  border-radius: var(--gh-radius);
+  text-align: center;
+}
+
+.maths-overlay-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+@media (max-width: 720px) {
+  .maths-play-header {
+    flex-wrap: wrap;
+  }
+
+  .maths-score-pill {
+    width: 100%;
+  }
+
+  .maths-companion {
+    left: 50% !important;
+    top: auto !important;
+    bottom: 26px;
+    transform: translateX(-50%);
+  }
+}
