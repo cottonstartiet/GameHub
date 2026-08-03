@@ -38,8 +38,8 @@ const BADGES: BadgeMeta[] = [
   { id: 'perfect-round', label: 'Perfect Round', emoji: '💯' },
 ];
 
-const BADGE_LOOKUP = Object.fromEntries(
-  BADGES.map((badge) => [badge.id, badge] satisfies [string, BadgeMeta])
+const BADGE_LOOKUP: Record<string, BadgeMeta> = Object.fromEntries(
+  BADGES.map((badge) => [badge.id, badge])
 );
 
 const COMPANIONS: Record<Companion, CompanionMeta> = {
@@ -86,7 +86,9 @@ export default function MathsGame() {
   const [view, setView] = useState<View>('menu');
   const [progressTick, setProgressTick] = useState(0);
   const progress = useMemo(() => getMathsProgress(), [progressTick]);
-  const [levelId, setLevelId] = useState(() => progress.unlockedLevels.at(-1) ?? 1);
+  const [levelId, setLevelId] = useState(
+    () => progress.unlockedLevels[progress.unlockedLevels.length - 1] ?? 1
+  );
   const [companion, setCompanion] = useState<Companion | null>(progress.companion);
 
   const totalStars = countStars(progress.bestStars);
@@ -201,7 +203,7 @@ export default function MathsGame() {
         <div className="maths-level-grid">
           {MATHS_LEVELS.map((level) => {
             const unlocked = progress.unlockedLevels.includes(level.id);
-            const bestStars = getMathsBestStars(level.id);
+            const bestStars = progress.bestStars[level.id] ?? 0;
             return (
               <button
                 key={level.id}
@@ -358,7 +360,11 @@ function MathsPlay({ levelId, companion, onExit }: MathsPlayProps) {
       setSelectedAnswer(null);
       setFeedback(null);
       setCompanionMood('ready');
-      setCompanionLine(`Puzzle ${questionIndex + 2} is ready. ${question.hint}`);
+      setCompanionLine(
+        `Puzzle ${questionIndex + 2} is ready. ${
+          questions[questionIndex + 1]?.hint ?? 'You can do it!'
+        }`
+      );
     }, 950);
   };
 
