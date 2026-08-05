@@ -287,6 +287,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-bottom: 130px;
 }
 
 .maths-board {
@@ -423,8 +424,27 @@
     flex-wrap: wrap;
   }
 
+  .maths-ghost-btn,
+  .maths-play-btn,
+  .maths-choice {
+    min-height: 46px;
+  }
+
   .maths-score-pill {
     width: 100%;
+  }
+
+  .maths-board {
+    padding: 20px 14px;
+  }
+
+  .maths-choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .maths-companion-bubble {
+    max-width: min(300px, 86vw);
+    font-size: 0.95rem;
   }
 
   .maths-companion {
@@ -432,5 +452,56 @@
     top: auto !important;
     bottom: 26px;
     transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 420px) {
+  .maths-menu {
+    padding: 16px 12px 30px;
+    padding-top: calc(16px + env(safe-area-inset-top));
+  }
+
+  .maths-panel {
+    padding: 14px;
+  }
+
+  .maths-play {
+    padding: 14px 10px 18px;
+    padding-top: calc(14px + env(safe-area-inset-top));
+  }
+
+  .maths-play-header {
+    gap: 8px;
+  }
+
+  .maths-play-status span {
+    font-size: 0.76rem;
+  }
+
+  .maths-score-pill {
+    padding: 8px 10px;
+  }
+
+  .maths-stage {
+    min-height: calc(100vh - 120px);
+    min-height: calc(100dvh - 120px);
+    padding-bottom: 148px;
+  }
+
+  .maths-board h2 {
+    font-size: clamp(1.35rem, 8vw, 1.9rem);
+  }
+
+  .maths-choice {
+    padding: 14px 10px;
+    font-size: 1.03rem;
+  }
+
+  .maths-companion {
+    bottom: 18px;
+  }
+
+  .maths-companion-body {
+    padding: 10px 12px;
   }
 }
