@@ -107,7 +107,7 @@ export default class BootScene extends Phaser.Scene {
     gnd.fillRect(0, GAME_H * 0.78, GAME_W, GAME_H * 0.22);
     // Grass/texture strip
     gnd.fillStyle(Phaser.Display.Color.ValueToColor(
-      key === 'bg1' ? '#2ecc71' : key === 'bg2' ? '#ff7043' : '#8b0000'
+      (key === 'bg1' || key === 'bg_setu') ? '#2ecc71' : key === 'bg2' ? '#ff7043' : '#8b0000'
     ).color, 1);
     gnd.fillRect(0, GAME_H * 0.78, GAME_W, 12);
     rt.draw(gnd, 0, 0);
