@@ -11,7 +11,7 @@ export default function Ramayana() {
   const [runId, setRunId] = useState(0);
   const [score, setScore] = useState(0);
   const [result, setResult] = useState<{ score: number; won: boolean } | null>(null);
-  const [levelTitle, setLevelTitle] = useState('Ramayana');
+  const [levelTitle] = useState('Ramayana');
 
   useEffect(() => {
     const bus = busRef.current;
@@ -29,14 +29,6 @@ export default function Ramayana() {
       document.body.classList.remove('gh-playing');
     };
   }, [runId]);
-
-  // Update title from bus events (scenes emit 'levelTitle')
-  useEffect(() => {
-    const bus = busRef.current;
-    const onTitle = (t: string) => setLevelTitle(t);
-    bus.on('levelTitle' as never, onTitle);
-    return () => { bus.off('levelTitle' as never, onTitle); };
-  }, []);
 
   const restart = () => {
     setScore(0);

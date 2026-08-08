@@ -79,6 +79,12 @@ export default class GameScene extends Phaser.Scene {
   // Trail particles
   private trailTimer?: Phaser.Time.TimerEvent;
 
+  // Ability tap cleanup
+  private abilityTapHandler: (() => void) | null = null;
+
+  // Bus cleanup
+  private scoreListener: ((s: number) => void) | null = null;
+
   init(data: SceneData) {
     const found = LEVELS.find(l => l.id === data.levelId);
     if (!found) throw new Error(`Unknown level ${data.levelId}`);
@@ -282,13 +288,14 @@ export default class GameScene extends Phaser.Scene {
     // Ability hint
     this._showAbilityHint(hero.ability);
 
-    // Single-tap ability handler
-    this.input.once('pointerdown', () => {
+    // Single-tap ability handler — stored so it can be removed on hero landing
+    this.abilityTapHandler = () => {
       if (this.heroLaunched && !this.abilityUsed && this.currentHero) {
         this.abilityUsed = true;
         this._triggerAbility();
       }
-    });
+    };
+    this.input.once('pointerdown', this.abilityTapHandler, this);
 
     this.bus.emitScore(this.score);
   }
@@ -381,7 +388,7 @@ export default class GameScene extends Phaser.Scene {
       if (!en.active) return;
       const dist = Phaser.Math.Distance.Between(cx, cy, en.x, en.y);
       if (dist <= radius) {
-        const dmg = Math.ceil(damage * (1 - dist / radius));
+        const dmg = Math.max(1, Math.ceil(damage * (1 - dist / radius)));
         this._damageEnemy(en, dmg, cx, cy);
       }
     });
@@ -487,6 +494,12 @@ export default class GameScene extends Phaser.Scene {
     if (!this.heroLaunched) return;
     this.heroLaunched = false;
     this._stopTrail();
+
+    // Clean up stale ability tap listener
+    if (this.abilityTapHandler) {
+      this.input.off('pointerdown', this.abilityTapHandler, this);
+      this.abilityTapHandler = null;
+    }
 
     if (this.currentHero && this.currentHero.active) {
       this.tweens.add({
@@ -652,7 +665,7 @@ export default class GameScene extends Phaser.Scene {
       strokeThickness: 4,
     }).setOrigin(0.5).setDepth(20);
 
-    // Score display (React HUD shows score via bus, but show in-canvas too)
+    // Score display — store listener so it can be removed on scene shutdown
     const scoreTxt = this.add.text(GAME_W - 16, 14, 'Score: 0', {
       fontFamily: 'sans-serif',
       fontSize: '18px',
@@ -660,7 +673,8 @@ export default class GameScene extends Phaser.Scene {
       stroke: '#000',
       strokeThickness: 3,
     }).setOrigin(1, 0).setDepth(20);
-    this.bus.on('score', (s: number) => { scoreTxt.setText(`Score: ${s}`); });
+    this.scoreListener = (s: number) => { scoreTxt.setText(`Score: ${s}`); };
+    this.bus.on('score', this.scoreListener);
 
     // Aim guide text
     const aimTxt = this.add.text(SLING_X, SLING_Y - 80, '← Drag to aim', {
@@ -849,5 +863,21 @@ export default class GameScene extends Phaser.Scene {
         localStorage.setItem('ramayana_unlocked', JSON.stringify(arr));
       }
     } catch { /* ignore */ }
+  }
+
+  // ─── Lifecycle cleanup ────────────────────────────────────────────────────
+
+  shutdown() {
+    // Remove bus listener to prevent accumulation on scene restarts
+    if (this.scoreListener) {
+      this.bus?.off('score', this.scoreListener);
+      this.scoreListener = null;
+    }
+    // Remove stale ability tap listener if scene shuts down mid-flight
+    if (this.abilityTapHandler) {
+      this.input.off('pointerdown', this.abilityTapHandler, this);
+      this.abilityTapHandler = null;
+    }
+    this._stopTrail();
   }
 }
