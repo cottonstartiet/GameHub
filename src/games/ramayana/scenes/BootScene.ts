@@ -144,7 +144,7 @@ export default class BootScene extends Phaser.Scene {
     id: string, color: number, skinColor: number,
     isMonkey: boolean, isBird: boolean
   ) {
-    const r = id === 'hanuman' ? 24 : id === 'jatayu' ? 22 : 20;
+    const r = id === 'hanuman' ? 24 : id === 'jatayu' ? 22 : id === 'sita' ? 18 : 20;
     const size = (r + 10) * 2;
     const g = this.add.graphics();
     const cx = size / 2;
@@ -165,6 +165,7 @@ export default class BootScene extends Phaser.Scene {
       g.fillStyle(0xf4a300, 1);
       g.fillTriangle(cx + 11, cy - 11, cx + 28, cy - 8, cx + 11, cy - 4); // beak
       g.fillStyle(0x111111, 1);
+      g.fillCircle(cx - 1, cy - 13, 2.1);
       g.fillCircle(cx + 5, cy - 13, 2.2);
       g.lineStyle(2, 0xd4af37, 1);
       g.lineBetween(cx - 2, cy + 10, cx - 6, cy + 20); // claw 1
