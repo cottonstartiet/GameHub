@@ -213,7 +213,7 @@ export const LEVELS: LevelConfig[] = [
     heroes: ['ram', 'ram', 'lakshman', 'hanuman', 'hanuman'],
     enemies: L1_ENEMIES,
     blocks: L1_BLOCKS,
-    bgKey: 'bg1',
+    bgKey: 'bg_setu',
     clearScore: 500,
     enemyPoints: 100,
     blockPoints: 20,
