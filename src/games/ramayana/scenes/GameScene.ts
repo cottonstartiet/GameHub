@@ -45,6 +45,8 @@ interface BlockSprite extends Phaser.Physics.Arcade.Image {
 }
 
 export default class GameScene extends Phaser.Scene {
+  constructor() { super('Game'); }
+
   private level!: LevelConfig;
   private bus!: GameEventBus;
 

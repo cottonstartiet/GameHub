@@ -35,8 +35,7 @@ export function createRamayanaGame(
       postBoot: (game) => {
         // Inject bus into all scenes via registry
         game.registry.set('bus', bus);
-        // Start boot scene with bus reference
-        game.scene.start('Boot');
+        // Boot scene auto-starts as the first entry in `scene`; no need to start it manually.
       },
     },
   });
