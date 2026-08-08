@@ -163,9 +163,9 @@ export default class BootScene extends Phaser.Scene {
       g.fillTriangle(cx - 12, cy - 4, cx - 30, cy - 18, cx - 28, cy + 8); // left wing
       g.fillTriangle(cx + 12, cy - 4, cx + 30, cy - 18, cx + 28, cy + 8); // right wing
       g.fillStyle(0xf4a300, 1);
-      g.fillTriangle(cx + 11, cy - 11, cx + 28, cy - 8, cx + 11, cy - 4); // beak
+      g.fillTriangle(cx + 9, cy - 11, cx + 26, cy - 8, cx + 9, cy - 4); // beak
       g.fillStyle(0x111111, 1);
-      g.fillCircle(cx - 1, cy - 13, 2.1);
+      g.fillCircle(cx - 1, cy - 13, 2.2);
       g.fillCircle(cx + 5, cy - 13, 2.2);
       g.lineStyle(2, 0xd4af37, 1);
       g.lineBetween(cx - 2, cy + 10, cx - 6, cy + 20); // claw 1
