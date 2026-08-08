@@ -31,6 +31,7 @@ export default class BootScene extends Phaser.Scene {
 
   private _generateTextures() {
     this._makeBg('bg1', 0x87ceeb, 0x228b22, 0x1e90ff); // sky, green, ocean
+    this._makeBg('bg_setu', 0x8dd8ff, 0x2e8b57, 0x4682b4); // level 1 calm bridge coast
     this._makeBg('bg2', 0xff7043, 0x4a148c, 0xffd54f); // burning sky, purple, gold
     this._makeBg('bg3', 0x1a1a2e, 0x8b0000, 0xff6b35);  // dark war sky
 
@@ -138,93 +139,109 @@ export default class BootScene extends Phaser.Scene {
     g.destroy();
   }
 
-  /** Character texture (circle-based hero) */
+  /** Character texture */
   private _makeCharTex(
     id: string, color: number, skinColor: number,
     isMonkey: boolean, isBird: boolean
   ) {
     const r = id === 'hanuman' ? 24 : id === 'jatayu' ? 22 : id === 'sita' ? 18 : 20;
-    const size = (r + 6) * 2;
+    const size = (r + 10) * 2;
     const g = this.add.graphics();
+    const cx = size / 2;
+    const cy = size / 2 + 2;
 
-    // Glow aura
     g.fillStyle(color, 0.2);
-    g.fillCircle(size / 2, size / 2, r + 5);
+    g.fillCircle(cx, cy, r + 6);
 
-    // Body
-    g.fillStyle(skinColor, 1);
-    g.fillCircle(size / 2, size / 2, r);
-    g.lineStyle(3, color, 1);
-    g.strokeCircle(size / 2, size / 2, r);
-
-    // Eyes
-    g.fillStyle(0x000000, 1);
-    g.fillCircle(size / 2 - 6, size / 2 - 4, 3);
-    g.fillCircle(size / 2 + 6, size / 2 - 4, 3);
-    g.fillStyle(0xffffff, 1);
-    g.fillCircle(size / 2 - 5, size / 2 - 5, 1.5);
-    g.fillCircle(size / 2 + 7, size / 2 - 5, 1.5);
-
-    // Mouth smile
-    g.lineStyle(2, 0x333333, 1);
-
-    if (isMonkey) {
-      // Monkey face for Hanuman
-      g.fillStyle(skinColor, 1);
-      g.fillEllipse(size / 2, size / 2 + 6, 18, 12);
-      g.lineStyle(2, 0x333333, 1);
-      // Mace indicator
+    if (isBird) {
+      // Jatayu (bird warrior)
+      g.fillStyle(0x5b3a29, 1);
+      g.fillEllipse(cx, cy + 4, 24, 30); // torso
+      g.fillStyle(0xffffff, 1);
+      g.fillEllipse(cx + 2, cy - 12, 18, 16); // head
+      g.fillStyle(color, 0.9);
+      g.fillTriangle(cx - 12, cy - 4, cx - 30, cy - 18, cx - 28, cy + 8); // left wing
+      g.fillTriangle(cx + 12, cy - 4, cx + 30, cy - 18, cx + 28, cy + 8); // right wing
+      g.fillStyle(0xf4a300, 1);
+      g.fillTriangle(cx + 9, cy - 11, cx + 26, cy - 8, cx + 9, cy - 4); // beak
+      g.fillStyle(0x111111, 1);
+      g.fillCircle(cx - 1, cy - 13, 2.2);
+      g.fillCircle(cx + 5, cy - 13, 2.2);
+      g.lineStyle(2, 0xd4af37, 1);
+      g.lineBetween(cx - 2, cy + 10, cx - 6, cy + 20); // claw 1
+      g.lineBetween(cx + 3, cy + 10, cx + 7, cy + 20); // claw 2
+      g.fillStyle(0xd4af37, 1);
+      g.fillTriangle(cx - 4, cy - 22, cx, cy - 29, cx + 4, cy - 22); // warrior crest
+    } else if (isMonkey) {
+      // Hanuman
+      g.fillStyle(0xd89d6b, 1);
+      g.fillCircle(cx, cy - 11, 11); // face
+      g.fillStyle(color, 1);
+      g.fillRoundedRect(cx - 11, cy - 2, 22, 26, 8); // body
+      g.fillStyle(0x111111, 1);
+      g.fillCircle(cx - 4, cy - 13, 2);
+      g.fillCircle(cx + 4, cy - 13, 2);
+      g.lineStyle(2, 0x222222, 1);
+      g.beginPath();
+      g.arc(cx, cy - 8, 4, 0.25, Math.PI - 0.25);
+      g.strokePath();
       g.lineStyle(4, 0xffd700, 1);
-      g.lineBetween(size / 2 + r - 2, size / 2 - r + 4, size / 2 + r + 8, size / 2 - r - 4);
+      g.lineBetween(cx + 12, cy - 10, cx + 25, cy - 20); // gada handle
       g.fillStyle(0xffd700, 1);
-      g.fillCircle(size / 2 + r + 8, size / 2 - r - 4, 5);
-      // Tail curl
+      g.fillCircle(cx + 27, cy - 22, 5); // gada head
       g.lineStyle(3, color, 0.8);
       g.beginPath();
-      g.arc(size / 2 + r, size / 2 + r - 5, 8, -0.5, Math.PI, false);
+      g.arc(cx + 14, cy + 15, 10, -0.3, Math.PI * 1.1, false); // tail
       g.strokePath();
-    } else if (isBird) {
-      // Wings for Jatayu
-      g.fillStyle(color, 0.7);
-      g.fillTriangle(
-        size / 2 - r, size / 2,
-        size / 2 - r - 20, size / 2 - 15,
-        size / 2 - r - 10, size / 2 + 10
-      );
-      g.fillTriangle(
-        size / 2 + r, size / 2,
-        size / 2 + r + 20, size / 2 - 15,
-        size / 2 + r + 10, size / 2 + 10
-      );
-      // Beak
-      g.fillStyle(0xffaa00, 1);
-      g.fillTriangle(size / 2 + r - 4, size / 2, size / 2 + r + 10, size / 2 - 3, size / 2 + r + 10, size / 2 + 3);
-    } else if (id === 'sita') {
-      // Crown/bindi for Sita
-      g.fillStyle(0xffd700, 1);
-      g.fillTriangle(size / 2 - 5, size / 2 - r, size / 2, size / 2 - r - 8, size / 2 + 5, size / 2 - r);
-      g.fillCircle(size / 2, size / 2, 4); // bindi dot
     } else {
-      // Crown for Ram/Lakshman
-      g.fillStyle(0xffd700, 1);
-      g.fillRect(size / 2 - 8, size / 2 - r - 3, 16, 5);
-      g.fillTriangle(size / 2 - 8, size / 2 - r + 2, size / 2 - 5, size / 2 - r - 8, size / 2 - 2, size / 2 - r + 2);
-      g.fillTriangle(size / 2 - 2, size / 2 - r + 2, size / 2, size / 2 - r - 10, size / 2 + 2, size / 2 - r + 2);
-      g.fillTriangle(size / 2 + 2, size / 2 - r + 2, size / 2 + 5, size / 2 - r - 8, size / 2 + 8, size / 2 - r + 2);
+      // Human form base (Ram / Lakshman / Sita)
+      const robe = id === 'sita' ? 0xd94b7f : color;
+      const sash = id === 'ram' ? 0xffd700 : id === 'lakshman' ? 0xe8f18b : 0xf9c3d7;
 
-      // Bow for Ram, sword for Lakshman
-      if (id === 'ram') {
-        g.lineStyle(3, 0x8b4513, 1);
-        g.beginPath();
-        g.arc(size / 2 + r + 2, size / 2, 12, -Math.PI / 2, Math.PI / 2);
-        g.strokePath();
-        g.lineStyle(1, 0xcccccc, 1);
-        g.lineBetween(size / 2 + r + 2, size / 2 - 12, size / 2 + r + 2, size / 2 + 12);
-      } else if (id === 'lakshman') {
-        g.fillStyle(0xaaaaaa, 1);
-        g.fillRect(size / 2 + r, size / 2 - 12, 4, 24);
+      g.fillStyle(0x3b2a1d, 1);
+      g.fillRoundedRect(cx - 9, cy + 16, 18, 12, 4); // feet
+      g.fillStyle(robe, 1);
+      g.fillRoundedRect(cx - 12, cy - 2, 24, 28, 9); // torso/robe
+      g.fillStyle(sash, 1);
+      g.fillRoundedRect(cx - 5, cy - 1, 10, 24, 4); // center sash
+      g.fillStyle(skinColor, 1);
+      g.fillCircle(cx, cy - 14, 10); // head
+      g.fillStyle(0x2f1f14, 1);
+      g.fillEllipse(cx, cy - 20, 16, 8); // hair
+      g.fillStyle(0x111111, 1);
+      g.fillCircle(cx - 3, cy - 15, 1.8);
+      g.fillCircle(cx + 3, cy - 15, 1.8);
+      g.lineStyle(1.5, 0x553322, 1);
+      g.lineBetween(cx - 2, cy - 11, cx + 2, cy - 11); // mouth
+
+      g.lineStyle(5, robe, 1);
+      g.lineBetween(cx - 9, cy + 4, cx - 15, cy + 14); // arm left
+      g.lineBetween(cx + 9, cy + 4, cx + 15, cy + 14); // arm right
+
+      if (id === 'sita') {
+        g.fillStyle(0xb21f4b, 1);
+        g.fillCircle(cx, cy - 16, 2); // bindi
         g.fillStyle(0xffd700, 1);
-        g.fillRect(size / 2 + r - 2, size / 2 - 2, 8, 4);
+        g.fillTriangle(cx - 4, cy - 24, cx, cy - 30, cx + 4, cy - 24); // head ornament
+      } else {
+        g.fillStyle(0xffd700, 1);
+        g.fillRect(cx - 7, cy - 27, 14, 4); // crown band
+        g.fillTriangle(cx - 6, cy - 23, cx - 3, cy - 30, cx, cy - 23);
+        g.fillTriangle(cx, cy - 23, cx + 3, cy - 31, cx + 6, cy - 23);
+
+        if (id === 'ram') {
+          g.lineStyle(2.5, 0x8b5a2b, 1);
+          g.beginPath();
+          g.arc(cx + 18, cy - 6, 10, -Math.PI / 2, Math.PI / 2);
+          g.strokePath();
+          g.lineStyle(1.2, 0xf2f2f2, 1);
+          g.lineBetween(cx + 18, cy - 16, cx + 18, cy + 4); // bow string
+        } else if (id === 'lakshman') {
+          g.fillStyle(0xc0c0c0, 1);
+          g.fillRect(cx + 14, cy - 14, 3, 20); // sword blade
+          g.fillStyle(0xffd700, 1);
+          g.fillRect(cx + 12, cy - 2, 7, 3); // hilt
+        }
       }
     }
 
