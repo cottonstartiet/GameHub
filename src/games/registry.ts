@@ -38,6 +38,16 @@ export const GAMES: GameMeta[] = [
     load: () => import('./maths/MathsGame'),
   },
   {
+    id: 'ramayana',
+    title: 'Ramayana',
+    tagline: '3 levels · Angry Birds style',
+    glyph: '🏹',
+    accentFrom: '#ffd700',
+    accentTo: '#8b0000',
+    available: true,
+    load: () => import('./ramayana/Ramayana'),
+  },
+  {
     id: 'coming-soon',
     title: 'More soon',
     tagline: 'New games incoming',

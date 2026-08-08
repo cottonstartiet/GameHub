@@ -1,0 +1,153 @@
+.ramayana-root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1a1a2e;
+  overflow: hidden;
+}
+
+.ramayana-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: rgba(0, 0, 0, 0.75);
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.ramayana-hud .hud-back {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.ramayana-hud .hud-back:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.ramayana-hud .hud-title {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  color: #ffd700;
+  text-shadow: 0 0 8px #ff8c00;
+}
+
+.ramayana-hud .hud-score {
+  font-family: sans-serif;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+  min-width: 110px;
+  text-align: right;
+}
+
+.ramayana-stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.ramayana-stage .phaser-holder {
+  width: 100%;
+  height: 100%;
+}
+
+/* Result overlay */
+.ramayana-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.ramayana-overlay-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2a0a0a 100%);
+  border: 2px solid #ffd700;
+  border-radius: 20px;
+  padding: 36px 48px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+  min-width: 300px;
+}
+
+.ramayana-overlay-card h2 {
+  font-family: Georgia, serif;
+  font-size: 38px;
+  margin: 0 0 12px;
+}
+
+.ramayana-overlay-card h2.win  { color: #ffd700; text-shadow: 0 0 20px #ff8c00; }
+.ramayana-overlay-card h2.lose { color: #ff4444; text-shadow: 0 0 20px #aa0000; }
+
+.ramayana-overlay-card .oc-score {
+  font-size: 24px;
+  color: #fff;
+  margin: 6px 0;
+}
+
+.ramayana-overlay-card .oc-best {
+  font-size: 16px;
+  color: #ffd700;
+  margin-bottom: 24px;
+}
+
+.ramayana-overlay-card .oc-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ramayana-overlay-card .play-btn {
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  color: #1a1a2e;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.ramayana-overlay-card .play-btn:hover {
+  filter: brightness(1.1);
+}
+
+.ramayana-overlay-card .ghost-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.ramayana-overlay-card .ghost-btn:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* Landscape lock notice (shown if somehow in portrait on mobile) */
+@media (orientation: portrait) and (max-width: 600px) {
+  .ramayana-root::before {
+    content: '🔄 Please rotate to landscape';
+    position: fixed;
+    inset: 0;
+    background: #1a1a2e;
+    color: #ffd700;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
+}
